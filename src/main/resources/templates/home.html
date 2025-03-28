@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Recetas Seguras - Inicio</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>Bienvenido a Recetas Seguras</h1>
+        <nav>
+            <a href="/recetas">Ver Recetas</a>
+            <a href="/login">Iniciar Sesión</a>
+            <a href="/register">Registrarse</a>
+        </nav>
+    </header>
+
+    <section>
+        <h2>Recetas Destacadas</h2>
+        <ul>
+            <li th:each="receta : ${recetas}">
+                <h3 th:text="${receta.nombre}"></h3>
+                <p th:text="${receta.descripcion}"></p>
+                <a th:href="@{/recetas/{id}(id=${receta.id})}">Ver más</a>
+            </li>
+        </ul>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Recetas Seguras</p>
+    </footer>
+</body>
+
+</html>

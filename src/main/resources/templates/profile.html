@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Recetas Seguras - Perfil</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Perfil de Usuario</h1>
+        <nav>
+            <a href="/">Inicio</a>
+            <a href="/recetas">Recetas</a>
+            <a href="/logout">Cerrar Sesión</a>
+        </nav>
+    </header>
+    
+    <section>
+        <h2>Información del Usuario</h2>
+        <form th:action="@{/profile}" method="post">
+            <div>
+                <label>Nombre de Usuario:</label>
+                <input type="text" name="username" th:value="${user.username}" required>
+            </div>
+            <div>
+                <label>Correo Electrónico:</label>
+                <input type="email" name="email" th:value="${user.email}" required>
+            </div>
+            <button type="submit">Guardar Cambios</button>
+        </form>
+    </section>
+    
+    <footer>
+        <p>&copy; 2025 Recetas Seguras</p>
+    </footer>
+</body>
+</html>

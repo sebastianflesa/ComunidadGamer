@@ -1,14 +1,24 @@
 package com.example.ComunidadGamer.model;
 
 public class RegistroRequest {
+    private String username;
     private String email;
     private String password;
+
+    // Getters y setters
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public String getEmail() {
         return email;
     }
 
-    private void setEmail(String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
@@ -16,7 +26,7 @@ public class RegistroRequest {
         return password;
     }
 
-    private void setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 }

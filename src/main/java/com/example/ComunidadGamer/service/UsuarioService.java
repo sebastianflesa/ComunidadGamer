@@ -1,8 +1,10 @@
 package com.example.ComunidadGamer.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.ComunidadGamer.model.Usuario;
@@ -10,14 +12,20 @@ import com.example.ComunidadGamer.repository.UsuarioRepository;
 
 @Service
 public class UsuarioService {
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+    private final UsuarioRepository usuarioRepository;
+    private final PasswordEncoder passwordEncoder;
+
+    public UsuarioService(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
+        this.usuarioRepository = usuarioRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     public Usuario findByEmail(String email) {
-        return usuarioRepository.findByEmail(email);
+        return usuarioRepository.findByEmail(email).orElse(null);
     }
 
     public Usuario save(Usuario usuario) {
+        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
         return usuarioRepository.save(usuario);
     }
 
@@ -30,16 +38,17 @@ public class UsuarioService {
     }
 
     public Usuario createUsuario(Usuario usuario) {
+        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
         return usuarioRepository.save(usuario);
     }
 
     public Usuario updateUsuario(Long id, Usuario usuario) {
         Usuario usuarioExistente = getUsuarioById(id);
         if (usuarioExistente != null) {
-            usuarioExistente.setNombre(usuario.getNombre());
-            usuarioExistente.setApellido(usuario.getApellido());
+            usuarioExistente.setUsername(usuario.getUsername());
             usuarioExistente.setEmail(usuario.getEmail());
-            usuarioExistente.setPassword(usuario.getPassword());
+            usuarioExistente.setPassword(passwordEncoder.encode(usuario.getPassword()));
+            usuarioExistente.setAuthorities(new ArrayList<>(usuario.getAuthorities()));
             return usuarioRepository.save(usuarioExistente);
         } else {
             return null;
@@ -48,5 +57,9 @@ public class UsuarioService {
 
     public void deleteUsuario(Long id) {
         usuarioRepository.deleteById(id);
+    }
+
+    public Optional<Usuario> buscarPorUsername(String username) {
+        return usuarioRepository.findByEmail(username);
     }
 }

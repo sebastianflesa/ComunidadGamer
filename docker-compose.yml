@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  comunidadgamer_db:
+    build: .
+    container_name: comunidadgamer_app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:h2:file:/data/comunidadgamer
+      SPRING_DATASOURCE_USERNAME: sa
+      SPRING_DATASOURCE_PASSWORD: ""
+      SPRING_H2_CONSOLE_ENABLED: "true"
+    volumes:
+      - comunidadgamer-data:/data
+
+  database:
+    image: oscarfonts/h2
+    container_name: comunidadgamer_db
+    ports:
+      - "1521:1521"
+      - "81:81"
+    environment:
+      H2_OPTIONS: "-ifNotExists"
+    volumes:
+      - recetas-data:/data
+
+volumes:
+  recetas-data:
