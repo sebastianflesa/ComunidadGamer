@@ -30,23 +30,29 @@ public class SecurityConfig {
         return new JwtAuthenticationFilter(usuarioDetailsService);
     }
 
+    /*
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/login", "/register", "/css/**").permitAll()
-                        .requestMatchers("/recetas/**").permitAll()
-                        .anyRequest().authenticated())
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-                .logout()
-                .deleteCookies("JSESSIONID")
-                .logoutSuccessUrl("/login")
-                .permitAll();
-
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/login", "/css/**", "/js/**").permitAll()
+                .anyRequest().authenticated()
+            )
+            .formLogin(form -> form
+                .loginPage("/login")
+                .permitAll()
+            )
+            .logout(logout -> logout.permitAll());
         return http.build();
     }
+    */
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        return http.build();
+    }
+    
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {

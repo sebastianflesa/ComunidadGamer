@@ -17,14 +17,20 @@ public class IndexController {
     private RecetaService recetaService;
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String indexPage(Model model) {
         List<Receta> recetas = recetaService.obtenerTodasLasRecetas();
         model.addAttribute("recetas", recetas);
         return "index";
     }
-
+    
     @GetMapping("/login")
     public String mostrarLogin() {
         return "login";
     }
+
+    @GetMapping("/registro")
+    public String registroPage() {
+        return "register";
+    }
+    
 }
