@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.ComunidadGamer.model.JwtResponse;
@@ -32,14 +33,14 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<?> authenticateUser(@RequestParam String email, @RequestParam String password) {
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
+                new UsernamePasswordAuthenticationToken(email, password));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = "GENERATED_JWT_TOKEN"; // Aquí se generaría el token real con una utilidad JWT
-        return ResponseEntity.ok(new JwtResponse(jwt, "Bearer", loginRequest.getEmail(), loginRequest.getEmail(), null));
+        String jwt = "GENERATED_JWT_TOKEN";
+        return ResponseEntity.ok(new JwtResponse(jwt, "Bearer", email, email, null));
     }
-
+    
     @PostMapping("/registro")
     public ResponseEntity<?> registerUser(@ModelAttribute RegistroRequest registroRequest) {
         Usuario usuario = new Usuario();
