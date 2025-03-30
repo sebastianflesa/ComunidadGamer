@@ -4,7 +4,8 @@
 <head>
     <title>Recetas Seguras - Iniciar Sesión</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+
 </head>
 
 <body>
@@ -17,7 +18,7 @@
     </header>
 
     <section>
-        <form th:action="@{/login}" method="post">
+        <form th:action="@{/api/auth/login}" method="post">
             <div>
                 <label>Correo Electrónico:</label>
                 <input type="email" name="email" required>

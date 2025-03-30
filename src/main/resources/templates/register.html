@@ -4,7 +4,7 @@
 <head>
     <title>Recetas Seguras - Registro</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="./css/styles.css">
 </head>
 
 <body>
@@ -17,7 +17,7 @@
     </header>
 
     <section>
-        <form th:action="@{/register}" method="post">
+        <form th:action="@{/api/auth/registro}" method="post">
             <div>
                 <label>Nombre de Usuario:</label>
                 <input type="text" name="username" required>

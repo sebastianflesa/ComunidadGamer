@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.7"
 
 services:
   comunidadgamer_db:
@@ -8,11 +8,11 @@ services:
       - "8080:8080"
     depends_on:
       - database
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:h2:file:/data/comunidadgamer
-      SPRING_DATASOURCE_USERNAME: sa
-      SPRING_DATASOURCE_PASSWORD: ""
-      SPRING_H2_CONSOLE_ENABLED: "true"
+    #environment:
+      #SPRING_DATASOURCE_URL: jdbc:h2:file:/data/comunidadgamer
+      #SPRING_DATASOURCE_USERNAME: sa
+      #SPRING_DATASOURCE_PASSWORD: ""
+      #SPRING_H2_CONSOLE_ENABLED: "true"
     volumes:
       - comunidadgamer-data:/data
 
@@ -28,4 +28,5 @@ services:
       - recetas-data:/data
 
 volumes:
+  comunidadgamer-data:
   recetas-data:
