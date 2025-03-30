@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.ComunidadGamer.model.JwtResponse;
 import com.example.ComunidadGamer.model.LoginRequest;
-import com.example.ComunidadGamer.model.RegistroRequest;
-import com.example.ComunidadGamer.model.Usuario;
 import com.example.ComunidadGamer.service.UsuarioService;
 
 @RestController
@@ -39,7 +37,7 @@ public class AuthController {
         return ResponseEntity.ok(new JwtResponse(jwt, "Bearer", loginRequest.getEmail(), loginRequest.getEmail(), null));
     }
 
-    @PostMapping("/registro")
+    /*@PostMapping("/registro")
     public ResponseEntity<?> registerUser(@RequestBody RegistroRequest registroRequest) {
         Usuario usuario = new Usuario();
         usuario.setUsername(registroRequest.getUsername());
@@ -47,5 +45,5 @@ public class AuthController {
         usuario.setPassword(passwordEncoder.encode(registroRequest.getPassword()));
         usuarioService.save(usuario);
         return ResponseEntity.ok("Usuario registrado exitosamente");
-    }
+    }*/
 }
